@@ -4,6 +4,7 @@ export interface User {
   fullName: string;
   email: string;
   role: 'learner' | 'admin';
+  points: number;
 }
 
 export enum ContentBlockType {
@@ -87,4 +88,12 @@ export interface ForumPost {
     author: Pick<User, 'id' | 'fullName'>;
     createdAt: string;
     content: string;
+}
+
+export interface Achievement {
+  id: string;
+  name: string;
+  description: string;
+  icon: string; 
+  unlocked: boolean;
 }

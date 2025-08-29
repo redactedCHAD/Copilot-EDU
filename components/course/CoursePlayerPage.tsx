@@ -7,6 +7,13 @@ import { MOCK_COURSE, MOCK_PROGRESS } from '../../data/mockData';
 import CourseSidebar from './CourseSidebar';
 import LessonViewer from './LessonViewer';
 import Spinner from '../ui/Spinner';
+import { useAuth } from '../../context/AuthContext';
+import Toast from '../ui/Toast';
+
+interface ToastState {
+  message: string;
+  type: 'success' | 'error' | 'info';
+}
 
 const CoursePlayerPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -14,7 +21,9 @@ const CoursePlayerPage: React.FC = () => {
   const [progress, setProgress] = useState<UserProgress>(MOCK_PROGRESS);
   const [activeLesson, setActiveLesson] = useState<Lesson | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [toast, setToast] = useState<ToastState | null>(null);
   const mainContentRef = useRef<HTMLDivElement>(null);
+  const { addPoints } = useAuth();
 
   useEffect(() => {
     // Simulate fetching course data
@@ -43,10 +52,19 @@ const CoursePlayerPage: React.FC = () => {
   };
 
   const handleToggleComplete = (lessonId: string) => {
-    setProgress(prev => ({
-      ...prev,
-      [lessonId]: !prev[lessonId]
-    }));
+    const wasCompleted = !!progress[lessonId];
+    
+    setProgress(prev => {
+      const newProgress = { ...prev, [lessonId]: !prev[lessonId] };
+      
+      if (!wasCompleted && newProgress[lessonId]) {
+        const pointsAwarded = 10;
+        addPoints(pointsAwarded);
+        setToast({ message: `+${pointsAwarded} points! Well done!`, type: 'success' });
+      }
+      
+      return newProgress;
+    });
   };
 
   if (isLoading || !course || !activeLesson) {
@@ -80,25 +98,28 @@ const CoursePlayerPage: React.FC = () => {
 
 
   return (
-    <div className="flex h-[calc(100vh-4rem)]">
-      <CourseSidebar
-        course={course}
-        progress={progress}
-        activeLessonId={activeLesson.id}
-        onSelectLesson={handleSelectLesson}
-      />
-      <div ref={mainContentRef} className="flex-1 overflow-y-auto bg-background">
-        <LessonViewer
-          lesson={activeLesson}
-          isCompleted={!!progress[activeLesson.id]}
-          onToggleComplete={handleToggleComplete}
-          onPreviousLesson={handlePreviousLesson}
-          onNextLesson={handleNextLesson}
-          hasPreviousLesson={hasPreviousLesson}
-          hasNextLesson={hasNextLesson}
+    <>
+      {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
+      <div className="flex h-[calc(100vh-4rem)]">
+        <CourseSidebar
+          course={course}
+          progress={progress}
+          activeLessonId={activeLesson.id}
+          onSelectLesson={handleSelectLesson}
         />
+        <div ref={mainContentRef} className="flex-1 overflow-y-auto bg-background">
+          <LessonViewer
+            lesson={activeLesson}
+            isCompleted={!!progress[activeLesson.id]}
+            onToggleComplete={handleToggleComplete}
+            onPreviousLesson={handlePreviousLesson}
+            onNextLesson={handleNextLesson}
+            hasPreviousLesson={hasPreviousLesson}
+            hasNextLesson={hasNextLesson}
+          />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

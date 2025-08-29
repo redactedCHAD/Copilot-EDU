@@ -5,6 +5,7 @@ export const MOCK_USER: User = {
   fullName: 'Alex Morgan',
   email: 'alex.morgan@example.com',
   role: 'learner',
+  points: 10,
 };
 
 export const MOCK_COURSE: Course = {
@@ -230,4 +231,54 @@ export const MOCK_FORUM_THREADS: ForumThread[] = [
              { id: 'post-4', author: { id: MOCK_USER.id, fullName: MOCK_USER.fullName }, createdAt: '5 hours ago', content: 'Here\'s my prompt for the bakery scenario in Module 2:\n\nROLE: You are a food-loving, witty social media manager for a cozy, local bakery.\nOBJECTIVE: Write an exciting Instagram caption announcing our new line of gluten-free pastries.\nLOGISTICS: The tone should be enthusiastic and friendly. Mention the "melt-in-your-mouth" texture. Include #GlutenFreeGoodness and #LocalBakery.\nEXAMPLE: "Sunshine and coffee, the perfect pair!"\n\nWhat do you all think?' },
         ]
     }
+];
+
+export const MOCK_ACHIEVEMENTS_CONFIG = [
+  {
+    id: 'ach-perfect-start',
+    name: 'Perfect Start',
+    description: 'Complete your first lesson.',
+    icon: 'Rocket',
+    condition: (progress: UserProgress) => Object.keys(progress).length >= 1,
+  },
+  {
+    id: 'ach-module-1',
+    name: 'AI Fundamentals',
+    description: 'Complete Module 1.',
+    icon: 'BrainCircuit',
+    condition: (progress: UserProgress, course: Course) => {
+      const moduleLessons = course.modules.find(m => m.id === 'module-1')?.lessons.map(l => l.id) || [];
+      return moduleLessons.every(lessonId => progress[lessonId]);
+    },
+  },
+  {
+    id: 'ach-module-2',
+    name: 'Prompt Master',
+    description: 'Complete Module 2.',
+    icon: 'PenTool',
+    condition: (progress: UserProgress, course: Course) => {
+      const moduleLessons = course.modules.find(m => m.id === 'module-2')?.lessons.map(l => l.id) || [];
+      return moduleLessons.every(lessonId => progress[lessonId]);
+    },
+  },
+    {
+    id: 'ach-module-3',
+    name: 'Marketing Maverick',
+    description: 'Complete Module 3.',
+    icon: 'Megaphone',
+    condition: (progress: UserProgress, course: Course) => {
+      const moduleLessons = course.modules.find(m => m.id === 'module-3')?.lessons.map(l => l.id) || [];
+      return moduleLessons.every(lessonId => progress[lessonId]);
+    },
+  },
+  {
+    id: 'ach-course-complete',
+    name: 'AI Co-Pilot Graduate',
+    description: 'Complete the entire course.',
+    icon: 'GraduationCap',
+    condition: (progress: UserProgress, course: Course) => {
+      const allLessons = course.modules.flatMap(m => m.lessons.map(l => l.id));
+      return allLessons.every(lessonId => progress[lessonId]);
+    },
+  },
 ];

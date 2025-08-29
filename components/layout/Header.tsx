@@ -1,7 +1,8 @@
+
 import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import { BrainCircuit } from 'lucide-react'; // Assuming lucide-react is available or use SVG
+import { Star } from 'lucide-react';
 
 const Logo = () => (
     <div className="flex items-center gap-2 text-xl font-bold text-text-primary">
@@ -30,6 +31,10 @@ const Header: React.FC = () => {
           <div className="flex items-center gap-4">
             {isAuthenticated ? (
               <>
+                <div className="flex items-center gap-2 bg-background px-3 py-1.5 rounded-full border border-border">
+                  <Star className="w-4 h-4 text-yellow-400" fill="currentColor" />
+                  <span className="font-bold text-sm text-text-primary">{user?.points}</span>
+                </div>
                 <span className="text-text-secondary hidden sm:block">Welcome, {user?.fullName.split(' ')[0]}</span>
                 <button
                   onClick={handleLogout}
