@@ -10,6 +10,7 @@ interface AuthContextType {
   logout: () => void;
   register: (name: string, email: string, pass: string) => Promise<void>;
   addPoints: (amount: number) => void;
+  updateUser: (details: { fullName: string; email: string }) => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -50,8 +51,15 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     });
   };
 
+  const updateUser = (details: { fullName: string; email: string }) => {
+    setUser(currentUser => {
+        if (!currentUser) return null;
+        return { ...currentUser, ...details };
+    });
+  };
+
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated: !!user, login, logout, register, addPoints }}>
+    <AuthContext.Provider value={{ user, isAuthenticated: !!user, login, logout, register, addPoints, updateUser }}>
       {children}
     </AuthContext.Provider>
   );

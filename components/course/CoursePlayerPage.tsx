@@ -9,6 +9,7 @@ import LessonViewer from './LessonViewer';
 import Spinner from '../ui/Spinner';
 import { useAuth } from '../../context/AuthContext';
 import Toast from '../ui/Toast';
+import Sidebar from '../layout/Sidebar';
 
 interface ToastState {
   message: string;
@@ -101,6 +102,7 @@ const CoursePlayerPage: React.FC = () => {
     <>
       {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
       <div className="flex h-[calc(100vh-4rem)]">
+        <Sidebar />
         <CourseSidebar
           course={course}
           progress={progress}

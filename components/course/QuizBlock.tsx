@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import type { QuizBlockData } from '../../types';
 
@@ -18,15 +19,27 @@ const QuizBlock: React.FC<QuizBlockProps> = ({ data }) => {
 
   const getOptionClasses = (index: number) => {
     if (!isAnswered) {
-      return 'border-border hover:border-primary hover:bg-primary/10';
+      return 'border-border hover:border-primary hover:bg-primary/10 transform hover:scale-[1.02]';
     }
+
+    let base = 'border-border opacity-60';
+    let transform = '';
+
     if (index === correctAnswerIndex) {
-      return 'border-green-500 bg-green-500/10 text-green-300';
+      base = 'border-green-500 bg-green-500/10 text-green-800';
+    } else if (index === selectedOption) {
+      base = 'border-red-500 bg-red-500/10 text-red-800';
     }
+
     if (index === selectedOption) {
-      return 'border-red-500 bg-red-500/10 text-red-300';
+      transform = 'scale-105 shadow-lg';
     }
-    return 'border-border text-gray-500';
+    
+    if (index !== correctAnswerIndex && index !== selectedOption) {
+        base += ' text-gray-500';
+    }
+
+    return `${base} ${transform}`;
   };
 
   return (
@@ -38,17 +51,17 @@ const QuizBlock: React.FC<QuizBlockProps> = ({ data }) => {
             key={index}
             onClick={() => handleOptionSelect(index)}
             disabled={isAnswered}
-            className={`w-full text-left p-4 border-2 rounded-md transition-all ${getOptionClasses(index)}`}
+            className={`w-full text-left p-4 border-2 rounded-md transition-all duration-300 ease-in-out ${getOptionClasses(index)}`}
           >
             {option}
           </button>
         ))}
       </div>
       {isAnswered && selectedOption !== correctAnswerIndex && (
-        <p className="mt-4 text-sm text-red-400">Not quite. The correct answer was "{options[correctAnswerIndex]}".</p>
+        <p className="mt-4 text-sm text-red-600">Not quite. The correct answer was "{options[correctAnswerIndex]}".</p>
       )}
       {isAnswered && selectedOption === correctAnswerIndex && (
-        <p className="mt-4 text-sm text-green-400">That's correct!</p>
+        <p className="mt-4 text-sm text-green-600">That's correct!</p>
       )}
     </div>
   );
