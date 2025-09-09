@@ -1,19 +1,16 @@
 
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
-import { MOCK_COURSE, MOCK_PROGRESS, MOCK_ACHIEVEMENTS_CONFIG } from '../../data/mockData';
+import { MOCK_COURSES, MOCK_PROGRESS, MOCK_ACHIEVEMENTS_CONFIG } from '../../data/mockData';
 import type { Course, UserProgress, Achievement } from '../../types';
 import AchievementsSection from '../dashboard/AchievementsSection';
 import { Star, CheckCircle, Award, User as UserIcon, Mail } from 'lucide-react';
 import Toast from '../ui/Toast';
 
-const calculateAchievements = (course: Course, progress: UserProgress): Achievement[] => {
+const calculateAchievements = (courses: Course[], progress: UserProgress): Achievement[] => {
   return MOCK_ACHIEVEMENTS_CONFIG.map(achConfig => ({
-    id: achConfig.id,
-    name: achConfig.name,
-    description: achConfig.description,
-    icon: achConfig.icon,
-    unlocked: achConfig.condition(progress, course),
+    ...achConfig,
+    unlocked: achConfig.condition(progress, courses),
   }));
 };
 
@@ -22,8 +19,7 @@ const ProfilePage: React.FC = () => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [formData, setFormData] = useState({ fullName: '', email: '' });
   
-  // Mocked data fetching
-  const [course] = useState<Course>(MOCK_COURSE);
+  const [courses] = useState<Course[]>(MOCK_COURSES);
   const [progress] = useState<UserProgress>(MOCK_PROGRESS);
   const [achievements, setAchievements] = useState<Achievement[]>([]);
   const [toast, setToast] = useState<{message: string, type: 'success' | 'error' | 'info'} | null>(null);
@@ -32,8 +28,8 @@ const ProfilePage: React.FC = () => {
     if (user) {
       setFormData({ fullName: user.fullName, email: user.email });
     }
-    setAchievements(calculateAchievements(course, progress));
-  }, [user, course, progress]);
+    setAchievements(calculateAchievements(courses, progress));
+  }, [user, courses, progress]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -60,7 +56,7 @@ const ProfilePage: React.FC = () => {
     return <div>Loading profile...</div>;
   }
 
-  const totalLessons = course.modules.reduce((acc, module) => acc + module.lessons.length, 0);
+  const totalLessons = courses.reduce((sum, course) => sum + course.modules.flatMap(m => m.lessons).length, 0);
   const completedLessons = Object.values(progress).filter(Boolean).length;
   const unlockedAchievements = achievements.filter(a => a.unlocked).length;
 

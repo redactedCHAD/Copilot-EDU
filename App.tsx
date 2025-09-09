@@ -11,6 +11,9 @@ import Header from './components/layout/Header';
 import Sidebar from './components/layout/Sidebar';
 import ForumPage from './components/forum/ForumPage';
 import ProfilePage from './components/profile/ProfilePage';
+import CourseCatalogPage from './components/course/CourseCatalogPage';
+import ShowcasePage from './components/showcase/ShowcasePage';
+import PricingPage from './components/pricing/PricingPage';
 
 const PrivateRoute: React.FC<{ children: React.ReactElement }> = ({ children }) => {
   const { isAuthenticated } = useAuth();
@@ -57,8 +60,11 @@ const App: React.FC = () => {
             {/* Private routes use the sidebar layout */}
             <Route element={<PrivateRoute><SidebarLayout /></PrivateRoute>}>
               <Route path="/dashboard" element={<DashboardPage />} />
+              <Route path="/courses" element={<CourseCatalogPage />} />
+              <Route path="/showcase" element={<ShowcasePage />} />
               <Route path="/community" element={<ForumPage />} />
               <Route path="/profile" element={<ProfilePage />} />
+              <Route path="/pricing" element={<PricingPage />} />
             </Route>
 
             {/* Course player page has its own layout, but is a private route */}

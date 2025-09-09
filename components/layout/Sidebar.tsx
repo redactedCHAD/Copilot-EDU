@@ -1,11 +1,12 @@
 
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, BookOpen, MessageSquare, User } from 'lucide-react';
+import { LayoutDashboard, BookOpen, MessageSquare, User, GalleryThumbnails, Gem } from 'lucide-react';
 
 const navItems = [
   { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
-  { href: '/course/ai-business-growth', label: 'Course', icon: BookOpen },
+  { href: '/courses', label: 'Courses', icon: BookOpen },
+  { href: '/showcase', label: 'Showcase', icon: GalleryThumbnails },
   { href: '/community', label: 'Community', icon: MessageSquare },
   { href: '/profile', label: 'Profile', icon: User },
 ];
@@ -23,7 +24,7 @@ const Sidebar: React.FC = () => {
             <li key={item.label}>
               <NavLink
                 to={item.href}
-                end={item.href === '/dashboard' || item.href === '/community' || item.href === '/profile'}
+                end={item.href !== '/courses'}
                 className={({ isActive }) =>
                   `${baseClasses} ${isActive ? activeClasses : inactiveClasses}`
                 }
@@ -35,6 +36,15 @@ const Sidebar: React.FC = () => {
           ))}
         </ul>
       </nav>
+      
+      {/* Upgrade Section */}
+      <div className="mt-auto">
+        <NavLink to="/pricing" className={({isActive}) => `flex items-center p-3 text-sm font-medium rounded-lg transition-colors bg-gradient-to-r from-purple-500 to-primary text-white hover:shadow-lg ${isActive ? 'ring-2 ring-white/50' : ''}`}>
+           <Gem className="w-5 h-5 mr-3" />
+           <span>Upgrade Plan</span>
+        </NavLink>
+      </div>
+
     </aside>
   );
 };

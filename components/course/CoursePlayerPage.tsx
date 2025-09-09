@@ -1,9 +1,9 @@
 
 
 import React, { useState, useEffect, useRef } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Navigate } from 'react-router-dom';
 import { Course, UserProgress, Lesson } from '../../types';
-import { MOCK_COURSE, MOCK_PROGRESS } from '../../data/mockData';
+import { MOCK_COURSES, MOCK_PROGRESS } from '../../data/mockData';
 import CourseSidebar from './CourseSidebar';
 import LessonViewer from './LessonViewer';
 import Spinner from '../ui/Spinner';
@@ -22,6 +22,7 @@ const CoursePlayerPage: React.FC = () => {
   const [progress, setProgress] = useState<UserProgress>(MOCK_PROGRESS);
   const [activeLesson, setActiveLesson] = useState<Lesson | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [courseFound, setCourseFound] = useState(true);
   const [toast, setToast] = useState<ToastState | null>(null);
   const mainContentRef = useRef<HTMLDivElement>(null);
   const { addPoints } = useAuth();
@@ -30,7 +31,14 @@ const CoursePlayerPage: React.FC = () => {
     // Simulate fetching course data
     setIsLoading(true);
     setTimeout(() => {
-      const courseData = MOCK_COURSE;
+      const courseData = MOCK_COURSES.find(c => c.slug === slug);
+
+      if (!courseData) {
+          setCourseFound(false);
+          setIsLoading(false);
+          return;
+      }
+      
       setCourse(courseData);
       
       const allLessons = courseData.modules
@@ -67,6 +75,10 @@ const CoursePlayerPage: React.FC = () => {
       return newProgress;
     });
   };
+  
+  if (!isLoading && !courseFound) {
+      return <Navigate to="/courses" />;
+  }
 
   if (isLoading || !course || !activeLesson) {
     return (
@@ -102,6 +114,7 @@ const CoursePlayerPage: React.FC = () => {
     <>
       {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
       <div className="flex h-[calc(100vh-4rem)]">
+        {/* We keep the main sidebar for consistent navigation */}
         <Sidebar />
         <CourseSidebar
           course={course}

@@ -1,14 +1,21 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { MOCK_COURSE } from '../../data/mockData';
-import { BookOpenCheck } from 'lucide-react';
+import { MOCK_COURSES, MOCK_CORE_CATEGORIES } from '../../data/mockData';
+import { Cpu, Image, Film } from 'lucide-react';
+
+const CoreIcons: { [key: string]: React.ElementType } = {
+  'core-llm': Cpu,
+  'core-image': Image,
+  'core-video': Film,
+}
 
 const CheckIcon = () => (
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 text-secondary mr-2 flex-shrink-0"><polyline points="20 6 9 17 4 12"></polyline></svg>
 );
 
 const LandingPage: React.FC = () => {
-  const { title, description, instructor, modules, price } = MOCK_COURSE;
+  const title = "All The Tools: AI";
+  const description = "The premier online destination for mastering the world's most impactful AI tools. Stay at the cutting edge of technological innovation.";
 
   return (
     <div className="bg-background text-text-primary">
@@ -23,14 +30,14 @@ const LandingPage: React.FC = () => {
                         {title}
                     </h1>
                     <p className="mt-6 max-w-3xl mx-auto text-lg sm:text-xl text-text-secondary">
-                        {description} Transform from a passive observer of AI trends into an active, strategic implementer of AI solutions within your own business.
+                        {description}
                     </p>
                     <div className="mt-10">
                         <NavLink
                         to="/register"
                         className="inline-block bg-gradient-to-r from-primary via-purple-500 to-secondary bg-[length:200%_auto] text-white font-bold py-4 px-8 rounded-lg text-lg transition-all duration-500 transform group-hover:scale-105 shadow-lg group-hover:shadow-primary/40 hover:bg-[right_center]"
                         >
-                        Enroll Now for ${price}
+                        Start Your Free Trial
                         </NavLink>
                     </div>
                  </div>
@@ -42,29 +49,29 @@ const LandingPage: React.FC = () => {
         <section className="py-20 bg-surface">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-12">
-                     <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">Gain a Sustainable Competitive Advantage</h2>
-                     <p className="mt-4 max-w-2xl mx-auto text-lg text-text-secondary">This course is designed for tangible, measurable return on investment (ROI).</p>
+                     <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">Unlock Your AI Potential</h2>
+                     <p className="mt-4 max-w-2xl mx-auto text-lg text-text-secondary">Go from theory to practice with hands-on, tool-specific training.</p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div className="flex items-start">
                         <CheckIcon />
                         <div>
-                            <h3 className="text-lg font-semibold">Automate Repetitive Tasks</h3>
-                            <p className="mt-1 text-text-secondary">Free up your most constrained resource—time—by learning to apply AI to your daily operations.</p>
+                            <h3 className="text-lg font-semibold">Stay Current</h3>
+                            <p className="mt-1 text-text-secondary">Our content is continuously updated to cover the latest and greatest AI tools as they emerge.</p>
                         </div>
                     </div>
                      <div className="flex items-start">
                         <CheckIcon />
                         <div>
-                            <h3 className="text-lg font-semibold">Enhance Marketing Effectiveness</h3>
-                            <p className="mt-1 text-text-secondary">Deliver hyper-personalized customer experiences that build loyalty and drive growth.</p>
+                            <h3 className="text-lg font-semibold">Learn by Doing</h3>
+                            <p className="mt-1 text-text-secondary">Master tools through practical, project-based lessons that build real-world skills.</p>
                         </div>
                     </div>
                      <div className="flex items-start">
                         <CheckIcon />
                         <div>
-                            <h3 className="text-lg font-semibold">Implement with Confidence</h3>
-                            <p className="mt-1 text-text-secondary">Graduate with a concrete, ready-to-implement AI strategy for your specific business.</p>
+                            <h3 className="text-lg font-semibold">Structured Learning Paths</h3>
+                            <p className="mt-1 text-text-secondary">Start with foundational concepts, then dive deep into the specific tools you need to succeed.</p>
                         </div>
                     </div>
                 </div>
@@ -74,49 +81,54 @@ const LandingPage: React.FC = () => {
         {/* Course Outline Section */}
         <section id="curriculum" className="py-20">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl font-extrabold text-center tracking-tight sm:text-4xl mb-16">Course Curriculum</h2>
-            <div className="max-w-4xl mx-auto">
-              {modules.map((module) => (
-                <div key={module.id} className="mb-8 bg-surface rounded-xl shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 ease-in-out overflow-hidden border border-border">
-                  <div className="p-6 bg-background border-b border-border flex items-center gap-4">
-                    <span className="text-2xl font-bold text-primary">0{module.order}</span>
-                    <h3 className="text-xl font-bold text-text-primary">{module.title}</h3>
+            <h2 className="text-3xl font-extrabold text-center tracking-tight sm:text-4xl mb-16">Explore Our Curriculum</h2>
+            <div className="max-w-4xl mx-auto space-y-12">
+              {MOCK_CORE_CATEGORIES.map((category) => {
+                const CategoryIcon = CoreIcons[category.id] || Cpu;
+                const categoryCourses = MOCK_COURSES.filter(c => c.categoryId === category.id);
+                const coreCourse = categoryCourses.find(c => c.type === 'CORE');
+                const toolCourses = categoryCourses.filter(c => c.type === 'TOOL');
+
+                return (
+                  <div key={category.id} className="bg-surface rounded-xl shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 ease-in-out border border-border overflow-hidden">
+                    <div className="p-6 bg-background border-b border-border">
+                        <div className="flex items-center gap-4">
+                            <CategoryIcon className="w-8 h-8 text-primary" />
+                            <div>
+                                <h3 className="text-2xl font-bold text-text-primary">{category.title}</h3>
+                                <p className="text-text-secondary mt-1">{category.description}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="p-6">
+                      {coreCourse && (
+                        <div className="mb-4 p-4 bg-primary/5 rounded-lg">
+                          <h4 className="font-bold text-primary">Core Concepts</h4>
+                          <p className="text-sm text-text-secondary mt-1">{coreCourse.title}</p>
+                        </div>
+                      )}
+                      <div>
+                        <h4 className="font-bold text-text-primary mb-3">Tool-Specific Courses</h4>
+                        <ul className="space-y-2">
+                          {toolCourses.map((course) => (
+                            <li key={course.id} className="text-text-secondary p-2 bg-background rounded-md">{course.title}</li>
+                          ))}
+                           <li className="text-text-secondary p-2 font-semibold">And more coming soon...</li>
+                        </ul>
+                      </div>
+                    </div>
                   </div>
-                  <ul className="p-6 space-y-4">
-                    {module.lessons.map((lesson) => (
-                      <li key={lesson.id} className="flex items-start">
-                        <BookOpenCheck className="w-5 h-5 text-secondary mr-4 mt-1 flex-shrink-0" />
-                        <span className="text-text-secondary">{lesson.title}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
-        </section>
-
-        {/* Instructor Section */}
-        <section id="instructor" className="py-20 bg-surface">
-             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="text-center mb-12">
-                    <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">Meet Your Instructor</h2>
-                </div>
-                <div className="flex flex-col md:flex-row items-center justify-center gap-10">
-                    <img className="w-40 h-40 rounded-full object-cover" src={instructor.avatarUrl} alt={instructor.name} />
-                    <div className="max-w-2xl text-center md:text-left">
-                        <h3 className="text-2xl font-bold">{instructor.name}</h3>
-                        <p className="mt-4 text-text-secondary">{instructor.bio}</p>
-                    </div>
-                </div>
-            </div>
         </section>
         
         {/* Final CTA */}
         <section className="py-20">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                 <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">Ready to Transform Your Business?</h2>
-                 <p className="mt-4 max-w-2xl mx-auto text-lg text-text-secondary">Stop guessing and start implementing. Become an AI-powered entrepreneur today.</p>
+                 <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">Ready to Become an AI Power User?</h2>
+                 <p className="mt-4 max-w-2xl mx-auto text-lg text-text-secondary">Stop watching from the sidelines. Start building with the best tools in the industry.</p>
                  <div className="mt-8">
                     <NavLink
                         to="/register"

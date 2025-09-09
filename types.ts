@@ -56,12 +56,24 @@ export interface Module {
   lessons: Lesson[];
 }
 
+export interface CoreCategory {
+  id:string;
+  title: string;
+  description: string;
+}
+
+export enum CourseType {
+  CORE = 'CORE',
+  TOOL = 'TOOL',
+}
+
 export interface Course {
   id: string;
-  title: string;
   slug: string;
+  title: string;
   description: string;
-  price: number;
+  categoryId: string;
+  type: CourseType;
   instructor: {
     name: string;
     bio: string;
@@ -96,4 +108,19 @@ export interface Achievement {
   description: string;
   icon: string; 
   unlocked: boolean;
+}
+
+export interface ShowcaseProject {
+  id: string;
+  title: string;
+  description: string;
+  imageUrl: string;
+  author: {
+    id: string;
+    fullName: string;
+    avatarUrl: string;
+  };
+  courseId: string;
+  likes: number;
+  createdAt: string;
 }

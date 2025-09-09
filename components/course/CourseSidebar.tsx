@@ -33,6 +33,7 @@ const ModuleAccordion: React.FC<{
 
     const lessonsCompleted = module.lessons.filter(l => progress[l.id]).length;
     const totalLessons = module.lessons.length;
+    const completionPercentage = totalLessons > 0 ? Math.round((lessonsCompleted / totalLessons) * 100) : 0;
     
     const getLessonClasses = (lesson: Lesson) => {
         if (activeLessonId === lesson.id) {
@@ -51,9 +52,15 @@ const ModuleAccordion: React.FC<{
                 className="w-full flex justify-between items-center p-4 text-left hover:bg-background"
                 onClick={() => setIsOpen(!isOpen)}
             >
-                <div>
+                <div className="flex-grow mr-4">
                     <h3 className="font-semibold text-text-primary">{module.title}</h3>
-                    <p className="text-xs text-text-secondary">{lessonsCompleted} / {totalLessons} completed</p>
+                    <p className="text-xs text-text-secondary mt-1">{lessonsCompleted} / {totalLessons} completed</p>
+                    <div className="w-full bg-gray-200 rounded-full h-1.5 mt-2">
+                        <div 
+                            className="bg-secondary h-1.5 rounded-full transition-all duration-500" 
+                            style={{ width: `${completionPercentage}%` }}
+                        ></div>
+                    </div>
                 </div>
                 <ChevronDownIcon className={`w-5 h-5 text-text-secondary transition-transform ${isOpen ? 'rotate-180' : ''}`} />
             </button>
