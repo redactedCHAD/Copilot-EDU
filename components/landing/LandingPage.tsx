@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { MOCK_COURSES, MOCK_CORE_CATEGORIES } from '../../data/mockData';
@@ -29,7 +30,10 @@ const LandingPage: React.FC = () => {
                     <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-primary via-purple-400 to-secondary [text-shadow:0_2px_10px_rgba(0,0,0,0.1)]">
                         {title}
                     </h1>
-                    <p className="mt-6 max-w-3xl mx-auto text-lg sm:text-xl text-text-secondary">
+                    <h2 className="mt-4 text-xl sm:text-2xl font-semibold text-text-primary tracking-wide">
+                        From Zero to Hero with the Tools That Matter. Master LLMs, Image Generation, Video Creation, and More.
+                    </h2>
+                    <p className="mt-4 max-w-3xl mx-auto text-lg sm:text-xl text-text-secondary">
                         {description}
                     </p>
                     <div className="mt-10">
