@@ -373,6 +373,349 @@ export const MOCK_COURSES: Course[] = [
         ]}
     ]
   },
+  {
+    id: 'course-gen-ai-marketing-intensive',
+    slug: 'gen-ai-marketing-weekend-intensive',
+    title: 'Generative AI Marketing: Weekend Intensive',
+    description: 'A 2-3 day crash course for digital marketers who want to build a complete AI-powered content system and generate 20+ assets in one weekend.',
+    categoryId: 'core-image',
+    type: CourseType.TOOL,
+    instructor: {
+      name: 'Casey Lee',
+      bio: 'Growth marketer and AI implementation specialist.',
+      avatarUrl: 'https://picsum.photos/id/1012/200/200'
+    },
+    modules: [
+      {
+        id: 'wi-m1',
+        title: 'Friday: Your AI Marketing Journey Starts Now',
+        order: 1,
+        lessons: [
+          {
+            id: 'wi-l1-1',
+            title: 'Session 1: Welcome, Masterclass & Setup',
+            order: 1,
+            contentBlocks: [
+              {
+                id: 'wi-cb-1-1-1',
+                order: 1,
+                blockType: ContentBlockType.MARKDOWN,
+                data: {
+                  content: `## 6:00-6:15 PM: Welcome & Community Building (15 min)
+- Live opening: "Why 200+ marketers chose to spend their weekend here"
+- Quick round-robin introductions (1 min each, 30 people max)
+- Set expectations: "By Sunday, you'll have built your entire content machine"
+- Tech check: Everyone logged into Gemini, Nano Banana, Gemini Veo`
+                }
+              },
+              {
+                id: 'wi-cb-1-1-2',
+                order: 2,
+                blockType: ContentBlockType.MARKDOWN,
+                data: {
+                  content: `## 6:15-6:45 PM: The AI Content Machine Masterclass (30 min)
+*Live presentation format with screen sharing*
+
+**SLIDE DECK: "How to Build Content 5x Faster"**
+- **HOOK (2 min):** Stat: "Marketers using AI save 20+ hours per week". Problem: "But most don't have a SYSTEM—they just use tools randomly". Solution: "This weekend, you'll build a repeatable machine".
+- **THE OPPORTUNITY (5 min):** Show live example: One keyword → Blog + 5 socials + 1 video (2-hour workflow). Play 90-second video montage: "Real students' results after this weekend".
+- **YOUR WEEKEND GOAL (8 min):** DAY 1: Master the text → visual → video workflow. DAY 2: Build your 30-day content calendar. DAY 3: Publish your first batch + optimize + celebrate.
+- **THE 4 DECISION POINTS (10 min):** Your core content theme, audience avatar, publishing channels, and brand voice guidelines.
+- **AGENDA PREVIEW (3 min):** Friday: Orientation + foundations. Saturday: Live intensive production. Sunday: Publishing, optimization, 90-day planning.
+- **RECAP:** "By Sunday at 5pm, you'll have built a content system that takes 2 hours/week to maintain."`
+                }
+              },
+              {
+                id: 'wi-cb-1-1-3',
+                order: 3,
+                blockType: ContentBlockType.MARKDOWN,
+                data: {
+                  content: `## 6:45-7:30 PM: Founder/Instructor Story & Q&A (45 min)
+- "How I built my AI content machine and got 50k followers in 90 days"
+- Key failures and lessons learned
+- Live Q&A: Answer 10-15 student questions about expectations, tools, capabilities`
+                }
+              },
+              {
+                id: 'wi-cb-1-1-4',
+                order: 4,
+                blockType: ContentBlockType.MARKDOWN,
+                data: {
+                  content: `## 7:30-8:15 PM: Intensive Setup & Tool Walkthrough (45 min)
+- Live walkthrough: Open Gemini, Nano Banana, Gemini Veo 3.1
+- Show each interface, key buttons, where to paste prompts
+- Demo: Generate one piece of content live (5-min blog post outline in Gemini)
+- Everyone follows along, generates their first output`
+                }
+              },
+              {
+                id: 'wi-cb-1-1-5',
+                order: 5,
+                blockType: ContentBlockType.MARKDOWN,
+                data: {
+                  content: `## 8:15-8:30 PM: Homework & Sleep Prep (15 min)
+- "Tonight, sleep well. You're about to have the most productive weekend of your year."
+- Pre-work questions: "What's your biggest content creation pain point?", "Who is your ideal audience?", "What's your unique angle/perspective?"`
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        id: 'wi-m2',
+        title: 'Saturday Morning: Text Generation Mastery',
+        order: 2,
+        lessons: [
+          {
+            id: 'wi-l2-1',
+            title: 'Sprint 1: The 7-Element Prompt Formula',
+            order: 1,
+            contentBlocks: [
+              {
+                id: 'wi-cb-2-1-1',
+                order: 1,
+                blockType: ContentBlockType.MARKDOWN,
+                data: {
+                  content: `## 9:15-10:05 AM: Sprint 1 - The 7-Element Prompt Formula (50 min)
+*Live, interactive workshop*
+
+**THE CONCEPT (5 min):** The prompt formula that produces 80% of AI content success. Why specific prompts = specific, convertible outputs.
+
+**THE FORMULA BREAKDOWN (10 min):**
+1. **ROLE**: "You are a..."
+2. **AUDIENCE**: "Write for..."
+3. **GOAL**: "The objective is..."
+4. **CONSTRAINTS**: "Keep it..."
+5. **TONE**: "Use a..."
+6. **FORMAT**: "Deliver as..."
+7. **EXAMPLES**: "Reference this style..."
+
+**LIVE BUILDING WORKSHOP (35 min):**
+- Instructor shares screen, opens Google Doc with formula template.
+- Build 3 complete prompts live for different businesses, showing reasoning.
+- Copy-paste each into Gemini simultaneously and show outputs in real-time.`
+                }
+              }
+            ]
+          },
+          {
+            id: 'wi-l2-2',
+            title: 'Sprint 2: Building Your First Prompts',
+            order: 2,
+            contentBlocks: [
+              {
+                id: 'wi-cb-2-2-1',
+                order: 1,
+                blockType: ContentBlockType.MARKDOWN,
+                data: {
+                  content: `## 10:15-11:05 AM: Sprint 2 - You Build Your First Prompts (50 min)
+*Guided but independent*
+
+**YOUR TASK:**
+- Create 3 prompts for your business using the formula.
+- Paste into Gemini and get your first outputs.
+- Screenshot the 3 best results and share in the community.
+
+**OUTPUT CHECKLIST:**
+☐ Prompt 1 created (blog post outline)
+☐ Prompt 2 created (social media captions)
+☐ Prompt 3 created (email subject lines)`
+                }
+              }
+            ]
+          },
+          {
+            id: 'wi-l2-3',
+            title: 'Sprint 3: SEO Optimization Deep Dive',
+            order: 3,
+            contentBlocks: [
+              {
+                id: 'wi-cb-2-3-1',
+                order: 1,
+                blockType: ContentBlockType.MARKDOWN,
+                data: {
+                  content: `## 11:15 AM-12:05 PM: Sprint 3 - SEO Optimization Deep Dive (50 min)
+*Live teaching + individual work*
+
+**YOU'LL LEARN (15 min):**
+- SEO checklist for AI-generated content.
+- Common gaps AI content has (and how to fix them).
+- Keyword density, readability, internal linking.
+
+**YOU'LL APPLY (35 min):**
+- Take one of your generated blog outlines.
+- Run through the SEO checklist.
+- Make 3-5 specific improvements.`
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        id: 'wi-m3',
+        title: 'Saturday Afternoon: Image & Video Sprint',
+        order: 3,
+        lessons: [
+          {
+            id: 'wi-l3-1',
+            title: 'Brand Identity & Thumbnail Creation',
+            order: 1,
+            contentBlocks: [
+              {
+                id: 'wi-cb-3-1-1',
+                order: 1,
+                blockType: ContentBlockType.MARKDOWN,
+                data: {
+                  content: `## 1:30-1:45 PM: Brand Identity Workshop (15 min)
+**QUICK EXERCISE:** Define your visual brand in 15 minutes.
+- What 3 colors define your brand?
+- What emotions do you want to evoke?
+- What's your "look"? (Minimalist/Bold/Photorealistic/Illustrated)
+- Fill in the provided brand visual guidelines template.`
+                }
+              },
+              {
+                id: 'wi-cb-3-1-2',
+                order: 2,
+                blockType: ContentBlockType.MARKDOWN,
+                data: {
+                  content: `## 1:45-2:35 PM: Sprint 1 - YouTube Thumbnail Creation (50 min)
+**TEACHING (10 min):** The psychology of thumbnail design (4 elements that matter).
+**BUILD YOUR PROMPTS (20 min):** Build 5 variations of a thumbnail for your video topic (High contrast, Urgency, Social proof, Novelty, Benefit-focused).
+**YOU GENERATE (20 min):** Copy each prompt variation into Nano Banana, generate thumbnails, and evaluate the best versions.`
+                }
+              }
+            ]
+          },
+          {
+            id: 'wi-l3-2',
+            title: 'Social Media & Video Generation',
+            order: 2,
+            contentBlocks: [
+              {
+                id: 'wi-cb-3-2-1',
+                order: 1,
+                blockType: ContentBlockType.MARKDOWN,
+                data: {
+                  content: `## 2:45-3:15 PM: Sprint 2 - Social Media Graphics (30 min)
+**YOUR TASK:** Generate 15 Instagram feed graphics using Nano Banana with unified brand guidelines.
+- 5 themes: Motivation/Education/Testimonial/Behind-the-scenes/CTA
+- 3 variations of each theme.`
+                }
+              },
+              {
+                id: 'wi-cb-3-2-2',
+                order: 2,
+                blockType: ContentBlockType.MARKDOWN,
+                data: {
+                  content: `## 3:30-4:15 PM: Sprint 1 - Script Generation (45 min)
+**YOU'LL CREATE:** 4 scripts using Gemini with a provided template (Hook → Body → CTA).
+- 1 Educational video script (30 sec)
+- 1 Product/service demo script (45 sec)
+- 1 Behind-the-scenes script (30 sec)
+- 1 Motivational/CTA script (30 sec)`
+                }
+              },
+              {
+                id: 'wi-cb-3-2-3',
+                order: 3,
+                blockType: ContentBlockType.MARKDOWN,
+                data: {
+                  content: `## 4:30-5:45 PM: Sprint 2 - Video Generation (75 min)
+**WHAT HAPPENS:** Using Gemini Veo 3.1, you'll generate all 4 videos.
+**WORKFLOW:** Submit scripts to Veo and perform essential edits (captions, music, branding) while waiting for generations to complete.`
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        id: 'wi-m4',
+        title: 'Sunday: Publishing & Planning Day',
+        order: 4,
+        lessons: [
+          {
+            id: 'wi-l4-1',
+            title: 'Content Calendar & Batch Generation',
+            order: 1,
+            contentBlocks: [
+              {
+                id: 'wi-cb-4-1-1',
+                order: 1,
+                blockType: ContentBlockType.MARKDOWN,
+                data: {
+                  content: `## 9:15-10:00 AM: Content Calendar Workshop (45 min)
+**FRAMEWORK: THE 4-WEEK FORMULA**
+- **WEEK 1: Foundation (Educational focus)**
+- **WEEK 2: Authority (Deep-dive focus)**
+- **WEEK 3: Community (Engagement focus)**
+- **WEEK 4: Conversion (CTA focus)**
+**LIVE CALENDAR BUILD (40 min):** Open a Google Sheets template and fill in Week 1 together, planning topics, angles, and hooks for each day.`
+                }
+              },
+              {
+                id: 'wi-cb-4-1-2',
+                order: 2,
+                blockType: ContentBlockType.MARKDOWN,
+                data: {
+                  content: `## 10:15-11:15 AM: Batch Content Generation (60 min)
+**PROCESS:** You'll generate ALL Week 1 content in 1 hour.
+- Write 1 Gemini prompt for a blog post + socials.
+- Generate in a batch and save all to a folder.
+- Multi-task by generating images in Nano Banana while text generates.`
+                }
+              }
+            ]
+          },
+          {
+            id: 'wi-l4-2',
+            title: 'Publishing, Automation & Graduation',
+            order: 2,
+            contentBlocks: [
+              {
+                id: 'wi-cb-4-2-1',
+                order: 1,
+                blockType: ContentBlockType.MARKDOWN,
+                data: {
+                  content: `## 1:45-3:00 PM: Sprint - Publish & Schedule Week 1 (75 min)
+**YOU'LL DO:**
+- Publish 1 blog post to your website.
+- Schedule 5-7 social media posts to a publishing tool (Buffer, Meta, etc.).
+- Upload 1-2 videos to YouTube.
+- Schedule an email announcement to your list.`
+                }
+              },
+              {
+                id: 'wi-cb-4-2-2',
+                order: 2,
+                blockType: ContentBlockType.MARKDOWN,
+                data: {
+                  content: `## 3:00-3:30 PM: Automation & Repurposing (30 min)
+**LIVE TEACHING:** "One blog post = 10+ pieces of content."
+- Show repurposing system.
+- Set up 1 automation (e.g., using Zapier to auto-post new blogs to social).`
+                }
+              },
+              {
+                id: 'wi-cb-4-2-3',
+                order: 3,
+                blockType: ContentBlockType.MARKDOWN,
+                data: {
+                  content: `## 4:00 PM - 5:00 PM: Celebration & Graduation
+- **Recap Your Accomplishments:** 25+ blog assets, 50+ social posts, 15+ graphics, 4+ videos, a 30-day content calendar.
+- **Certification:** Receive your "Generative AI Marketing: Weekend Intensive Certification".
+- **Final Message & CTA:** "This week, DO IT. Publish every single day. Run the machine you built."`
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
 ];
 
 export const MOCK_PROGRESS: UserProgress = {
